@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <body>
+
+    <h1 style="text-align: center;">Calvin</h1>
+    <p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://chutzpah.typepad.com/.a/6a00e55180ed5c88340133ecfe4a0c970b-pi" alt="Calvin having to wait" width="600" height="200" /></p>
+    <p>&nbsp;</p>
+    <p style="text-align: center;">Source: <a title="link" href="https://chutzpah.typepad.com/.a/6a00e55180ed5c88340133ecfe4a0c970b-pi">Calvin and Hobbes</a></p>
+    <p>Open-source technology moves fast, and enterprises that don't consider open-source tech as a serious part of their toolkit will get left behind. However, adopting open-source technologies comes with a level of risk: they could be full of bugs, not have enough features, or have minimialistic documentation, and these three things mostly happen <strong>because</strong> open-source projects might not always have active communities.</p>
+    <p>Calvin attempts to give enterprises the ability to evaluate the risk of an open-source project's community: if there's an active community, bugs will be found faster, features will be added sooner and worked on by more people, and documentation will trend towards being mostly usable. Rather than having to wait six weeks for the maintainers of a stale project to finally get around to an issue, enterprises can be more certain that opening issues and PRs on projects will be incorporated into a more buzzing community.</p>
+    <p>&nbsp;</p>
+    <p>Submit a repository as "orgname/reponame" to check below (e.g. for "facebook/react", "facebook" is the organization name and "react" is the repository name)</p>
+    <form id="name_form">
+        <label>Org Name:</label><input type="text" name="orgname"/>
+        <br/>
+        <label>Rep Name:</label><input type="text" name="repname"/>
+        <br/>
+        <input type="submit" value="submit" />
+    </form>
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript">
+        $('#name_form').submit(function(e) {
+                    e.preventDefault();
+                    var data = {};
+                    var Form = this;
+                    $.each(this.elements, function(i, v) {
+                        var input = $(v);
+                        data[input.attr("name")] = input.val();
+                        delete data["undefined"];
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/apply_model',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        context: Form,
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).text(callback.response);
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+        </script>
+
+  </body>
+</html>
