@@ -1,9 +1,10 @@
 import json
 from dataeng import vectorize_from_github_name, convert_number_to_value, convert_value_to_number
-from sklearn import svm
+from interpret.glassbox import ExplainableBoostingClassifier
+from interpret import show
 import argparse
 
-clf = svm.SVC()
+clf = ExplainableBoostingClassifier()
 
 def train_model():
     train_github_vecs = []
@@ -24,6 +25,11 @@ def apply_model(name): # returns number from 0 to 1 representing
     result = clf.predict([github_vec])
     retval = convert_number_to_value(result[0])
     return retval
+'''
+def show_model():
+    clf_global = clf.explain_global()
+    show(clf_global)
+'''
 
 def parse_args():
     parser = argparse.ArgumentParser()

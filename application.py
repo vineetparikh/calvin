@@ -22,6 +22,5 @@ def say_name():
     response = "This open-source codebase is considered: "+apply_model(orgname+"/"+repname)+". Reload this page to check a new repository!"
     return jsonify(response=response)
 
-
 if __name__ == "__main__":
     app.run(debug=True)

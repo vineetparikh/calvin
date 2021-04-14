@@ -5,7 +5,7 @@ Converts Github metadata into a vector of (num of)
 [stars, contributors, commits, branches, closed issues, open issues, PRs, releases, forks, watchers]
 Accepts info in the form "org name/repo name". For instance, "numpy/numpy".
 '''
-g = Github("","") # this would be filled in with credentials
+g = Github("vineetparikh","POMDPx12") # this would be filled in with credentials
 
 def convert_number_to_value(number):
     if(number==1):
